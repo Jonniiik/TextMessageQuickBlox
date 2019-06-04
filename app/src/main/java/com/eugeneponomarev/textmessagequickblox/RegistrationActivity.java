@@ -63,8 +63,14 @@ public class RegistrationActivity extends AppCompatActivity {
     private void registrationApp() {
         String login = editLoginRegistration.getText().toString();
         String password = editPasswordRegistration.getText().toString();
+        String email = editEmailRegistration.getText().toString();
+        String username = editUsernameRegistration.getText().toString();
 
         QBUser qbUser = new QBUser(login, password);
+        qbUser.setFullName(username);
+        qbUser.setEmail(email);
+
+
         QBUsers.signUp(qbUser).performAsync(new QBEntityCallback<QBUser>() {
             @Override
             public void onSuccess(QBUser qbUser, Bundle bundle) {

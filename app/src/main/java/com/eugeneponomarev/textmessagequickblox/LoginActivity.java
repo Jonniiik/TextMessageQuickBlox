@@ -76,8 +76,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginApp() {
-        String login = editLogin.getText().toString();
-        String password = editPasswordLogin.getText().toString();
+        final String login = editLogin.getText().toString();
+        final String password = editPasswordLogin.getText().toString();
 
         QBUser qbUser = new QBUser(login, password);
         QBUsers.signIn(qbUser).performAsync(new QBEntityCallback<QBUser>() {
@@ -85,6 +85,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(QBUser qbUser, Bundle bundle) {
                 Toast.makeText(LoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("login", login);
+                intent.putExtra("password", password);
                 startActivity(intent);
             }
 

@@ -19,6 +19,10 @@ public class SettingFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static SettingFragment newInstance(){
+        return new SettingFragment();
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

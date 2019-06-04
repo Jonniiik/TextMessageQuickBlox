@@ -3,6 +3,7 @@ package com.eugeneponomarev.textmessagequickblox;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
@@ -23,12 +24,15 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_chats:
                     mTextMessage.setText(R.string.title_chats);
+
                     return true;
                 case R.id.navigation_contacts:
                     mTextMessage.setText(R.string.title_contacts);
+                    loadFragment(ContactsFragment.newInstance());
                     return true;
                 case R.id.navigation_setting:
                     mTextMessage.setText(R.string.title_setting);
+                    loadFragment(SettingFragment.newInstance());
                     return true;
             }
             return false;
@@ -44,28 +48,31 @@ public class MainActivity extends AppCompatActivity {
         navigationMainActivity.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigationMainActivity.setOnNavigationItemSelectedListener(navListener);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer, new ChatFragment()).commit();
+        loadFragment(ChatFragment.newInstance());
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            Fragment selectedFragment = null;
-            switch (menuItem.getItemId()){
+            switch (menuItem.getItemId()) {
                 case R.id.navigation_chats:
-                    selectedFragment = new ChatFragment();
+                    loadFragment(ChatFragment.newInstance());
                     break;
                 case R.id.navigation_contacts:
-                    selectedFragment = new ContactsFragment();
+                    loadFragment(ContactsFragment.newInstance());
                     break;
                 case R.id.navigation_setting:
-                    selectedFragment = new SettingFragment();
+                    loadFragment(SettingFragment.newInstance());
                     break;
             }
-            assert selectedFragment != null;
-            getSupportFragmentManager().beginTransaction().replace(R.id.frameContainer, selectedFragment).commit();
             return true;
         }
     };
+
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frameContainer, fragment);
+        fragmentTransaction.commit();
+    }
 
 }
