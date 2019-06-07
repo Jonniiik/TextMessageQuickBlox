@@ -60,10 +60,6 @@ public class ChatFragment extends Fragment {
     }
 
     private void createSessionChat() {
-//        final ProgressDialog mDialog = new ProgressDialog(getActivity());
-//        mDialog.setMessage("Please waiting....");
-//        mDialog.setCanceledOnTouchOutside(false);
-//        mDialog.show();
 
         String login, password;
         login = getActivity().getIntent().getStringExtra("login");
@@ -82,7 +78,7 @@ public class ChatFragment extends Fragment {
                 QBChatService.getInstance().login(qbUser, new QBEntityCallback() {
                     @Override
                     public void onSuccess(Object o, Bundle bundle) {
-//                        mDialog.dismiss();
+
                     }
 
                     @Override
@@ -94,7 +90,7 @@ public class ChatFragment extends Fragment {
 
             @Override
             public void onError(QBResponseException e) {
-
+                Log.e("ERROR", e.getMessage());
             }
         });
     }

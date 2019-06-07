@@ -9,8 +9,10 @@ import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.eugeneponomarev.textmessagequickblox.Adapter.ChatAdapter;
 import com.eugeneponomarev.textmessagequickblox.Fragments.ChatFragment;
 import com.eugeneponomarev.textmessagequickblox.Fragments.ContactsFragment;
+import com.eugeneponomarev.textmessagequickblox.Fragments.CreateChatsFragment;
 import com.eugeneponomarev.textmessagequickblox.Fragments.SettingFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,20 +24,21 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_chats:
-                    mTextMessage.setText(R.string.title_chats);
-
-                    return true;
                 case R.id.navigation_contacts:
                     mTextMessage.setText(R.string.title_contacts);
                     loadFragment(ContactsFragment.newInstance());
+                    return true;
+                case R.id.navigation_chats:
+                    mTextMessage.setText(R.string.title_chats);
+                    loadFragment(ChatFragment.newInstance());
                     return true;
                 case R.id.navigation_setting:
                     mTextMessage.setText(R.string.title_setting);
                     loadFragment(SettingFragment.newInstance());
                     return true;
             }
-            return false;
+
+            return true;
         }
     };
 
@@ -45,8 +48,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         BottomNavigationView navigationMainActivity = findViewById(R.id.navigationMainActivity);
         mTextMessage = findViewById(R.id.message);
+
         navigationMainActivity.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigationMainActivity.setOnNavigationItemSelectedListener(navListener);
+
+        navigationMainActivity.setSelectedItemId(R.id.navigation_chats);
 
         loadFragment(ChatFragment.newInstance());
     }
@@ -55,16 +61,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             switch (menuItem.getItemId()) {
-                case R.id.navigation_chats:
-                    loadFragment(ChatFragment.newInstance());
-                    break;
                 case R.id.navigation_contacts:
+
                     loadFragment(ContactsFragment.newInstance());
                     break;
+                case R.id.navigation_chats:
+
+                    loadFragment(ChatFragment.newInstance());
+                    break;
                 case R.id.navigation_setting:
+
                     loadFragment(SettingFragment.newInstance());
                     break;
             }
+
             return true;
         }
     };

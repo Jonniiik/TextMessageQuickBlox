@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorFragments"
+    android:orientation="vertical"
     tools:context=".Fragments.ContactsFragment">
 
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/buttonAddContactsInChat"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayoutAddGroupChat"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="20dp"
-        android:src="@android:drawable/ic_input_add"
-        android:focusable="true" />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageViewAddGroupChat"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/ic_group_chat" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:text="Create group chats"
+            android:textColor="#fff"
+            android:textSize="25sp" />
+    </LinearLayout>
 
     <ListView
+        android:layout_marginTop="2dp"
         android:id="@+id/listContacts"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"></ListView>
 
-    </ListView>
-
-
-
-</RelativeLayout>
+</LinearLayout>

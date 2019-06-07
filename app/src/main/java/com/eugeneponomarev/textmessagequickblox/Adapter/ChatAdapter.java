@@ -68,7 +68,7 @@ public class ChatAdapter extends BaseAdapter {
                     .endConfig()
                     .round();
 
-            TextDrawable drawable = builder.build(textViewListChatDialog_NameChat.getText().toString().substring(0,1).toUpperCase(), randomColor);
+            TextDrawable drawable = builder.build(textViewListChatDialog_NameChat.getText().toString().substring(0,2).toUpperCase(), randomColor);
 
             imageChat.setImageDrawable(drawable);
         }
