@@ -1,16 +1,20 @@
 package com.eugeneponomarev.textmessagequickblox.Fragments;
 
 
-import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.eugeneponomarev.textmessagequickblox.Adapter.ChatAdapter;
+import com.eugeneponomarev.textmessagequickblox.ChatMessageActivity;
+import com.eugeneponomarev.textmessagequickblox.Common.Common;
+import com.eugeneponomarev.textmessagequickblox.Holder.QBUsersHolder;
 import com.eugeneponomarev.textmessagequickblox.R;
 import com.quickblox.auth.QBAuth;
 import com.quickblox.auth.session.BaseService;
@@ -22,10 +26,10 @@ import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.BaseServiceException;
 import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.core.request.QBRequestGetBuilder;
+import com.quickblox.users.QBUsers;
 import com.quickblox.users.model.QBUser;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ChatFragment extends Fragment {
 
@@ -54,6 +58,16 @@ public class ChatFragment extends Fragment {
 
         createSessionChat();
 
+        listChatDialogs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                QBChatDialog qbChatDialog = (QBChatDialog) listChatDialogs.getAdapter().getItem(position);
+                Intent intent = new Intent(getActivity(), ChatMessageActivity.class);
+                intent.putExtra(Common.DIALOG_EXTRA, qbChatDialog);
+                startActivity(intent);
+            }
+        });
+
         loadChatDialog();
 
         return view;
@@ -64,6 +78,18 @@ public class ChatFragment extends Fragment {
         String login, password;
         login = getActivity().getIntent().getStringExtra("login");
         password = getActivity().getIntent().getStringExtra("password");
+
+        QBUsers.getUsers(null).performAsync(new QBEntityCallback<ArrayList<QBUser>>() {
+            @Override
+            public void onSuccess(ArrayList<QBUser> qbUsers, Bundle bundle) {
+                QBUsersHolder.getInstance().putUsers(qbUsers);
+            }
+
+            @Override
+            public void onError(QBResponseException e) {
+                Log.e("ERROR", e.getMessage());
+            }
+        });
 
         final QBUser qbUser = new QBUser(login, password);
         QBAuth.createSession(qbUser).performAsync(new QBEntityCallback<QBSession>() {

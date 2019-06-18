@@ -19,8 +19,10 @@ allprojects {
         google()
         jcenter()
         maven {
-            url "https://github.com/QuickBlox/quickblox-android-sdk-releases/raw/master/"
+            url 'https://github.com/QuickBlox/quickblox-android-sdk-releases/raw/master/'
         }
+
+        maven { url 'https://jitpack.io' }
     }
 }
 

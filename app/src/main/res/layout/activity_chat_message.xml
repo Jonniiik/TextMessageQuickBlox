@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#034B85"
+    tools:context=".ChatMessageActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarChatMessageActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorChatMessage"
+        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/MenuStyle">
+
+    </android.support.v7.widget.Toolbar>
+
+    <ListView
+        android:id="@+id/listMessage"
+        android:layout_above="@id/linearLayoutBottom"
+        android:layout_below="@id/toolbarChatMessageActivity"
+        android:layout_width="match_parent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="15dp"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorChatMessage"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/smileButton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_weight="0.1"
+            android:background="@color/colorChatMessage"
+            android:padding="2dp"
+            app:srcCompat="@drawable/ic_smile" />
+
+        <EditText
+            android:hint="Message..."
+            android:textColorHint="#fff"
+            android:id="@+id/editTextMessage"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/buckground_textview_sendmessage"
+            android:padding="2dp"
+            android:textColor="#fff" />
+
+        <ImageButton
+            android:id="@+id/sendMessageButton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_weight="0.1"
+            android:background="@null"
+            android:padding="2dp"
+            app:srcCompat="@drawable/ic_send" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
